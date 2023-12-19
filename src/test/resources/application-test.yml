@@ -1,0 +1,11 @@
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+
+test-resources:
+  containers:
+    postgres:
+      image-name: postgres:14.10
