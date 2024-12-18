@@ -1,6 +1,8 @@
 package alex.demo.entities;
 
 import alex.demo.repositories.DemoEntityRepository;
+import com.github.database.rider.core.api.configuration.DBUnit;
+import com.github.database.rider.core.api.configuration.Orthography;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -8,7 +10,11 @@ import jakarta.inject.Inject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-@MicronautTest(transactional = false)
+
+@MicronautTest()
+@DBUnit(cacheConnection = false,
+        caseInsensitiveStrategy = Orthography.LOWERCASE,
+        schema = "public")
 public class DemoEntityTest {
 
     @Inject
@@ -17,7 +23,7 @@ public class DemoEntityTest {
     @DBRider
     @DataSet(value = "dataset/seed.json")
     @Test
-    void can_load_entity() {
+    void can_load_entity()  {
         Long count = demoEntityRepository.count();
         Assertions.assertEquals(1, count);
     }
