@@ -1,8 +1,8 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "3.6.0"
-    id("io.micronaut.test-resources") version "3.6.0"
-    id("io.micronaut.aot") version "3.6.0"
+    id("io.micronaut.application") version "4.2.1"
+    id("io.micronaut.test-resources") version "4.2.1"
+    id("io.micronaut.aot") version "4.2.1"
 }
 
 version = "0.1"
@@ -13,10 +13,6 @@ repositories {
 }
 
 dependencies {
-    implementation platform("io.micronaut:micronaut-bom:3.6.0")
-    annotationProcessor platform("io.micronaut:micronaut-bom:3.6.0")
-    testAnnotationProcessor platform("io.micronaut:micronaut-bom:3.6.0")
-
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     annotationProcessor("io.micronaut:micronaut-http-validation")
@@ -29,14 +25,13 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-jdbc-tomcat")
     implementation("jakarta.annotation:jakarta.annotation-api")
     compileOnly("io.micronaut:micronaut-http-client")
-    implementation("javax.persistence:javax.persistence-api:2.2")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.yaml:snakeyaml")
-    testImplementation "io.micronaut.test:micronaut-test-junit5"
     testImplementation("io.micronaut:micronaut-http-client")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
+    testImplementation("io.micronaut.testresources:micronaut-test-resources-extensions-junit-platform")
 }
 
 
@@ -50,10 +45,25 @@ java {
 
 
 graalvmNative.toolchainDetection = false
-
-
 micronaut {
-    version "3.6.0"
+    runtime("netty")
+    testRuntime("junit5")
     processing {
+        incremental(true)
+        annotations("alex.demo.*")
+    }
+    aot {
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        optimizeServiceLoading = false
+        convertYamlToJava = false
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+        optimizeNetty = true
     }
 }
+
+
+
