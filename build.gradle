@@ -1,8 +1,8 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "3.5.3"
-    id("io.micronaut.test-resources") version "3.5.3"
-    id("io.micronaut.aot") version "3.5.3"
+    id("io.micronaut.application") version "3.6.0"
+    id("io.micronaut.test-resources") version "3.6.0"
+    id("io.micronaut.aot") version "3.6.0"
 }
 
 version = "0.1"
@@ -13,9 +13,9 @@ repositories {
 }
 
 dependencies {
-    implementation platform("io.micronaut:micronaut-bom:3.5.3")
-    annotationProcessor platform("io.micronaut:micronaut-bom:3.5.3")
-    testAnnotationProcessor platform("io.micronaut:micronaut-bom:3.5.3")
+    implementation platform("io.micronaut:micronaut-bom:3.6.0")
+    annotationProcessor platform("io.micronaut:micronaut-bom:3.6.0")
+    testAnnotationProcessor platform("io.micronaut:micronaut-bom:3.6.0")
 
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
@@ -53,7 +53,7 @@ graalvmNative.toolchainDetection = false
 
 
 micronaut {
-    version "3.5.3"
+    version "3.6.0"
     processing {
     }
 }
