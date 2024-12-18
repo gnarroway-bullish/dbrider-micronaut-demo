@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-@MicronautTest()
+@MicronautTest(transactional = false)
 @DBUnit(cacheConnection = false,
         caseInsensitiveStrategy = Orthography.LOWERCASE,
         schema = "public")
